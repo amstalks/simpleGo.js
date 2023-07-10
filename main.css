@@ -1,3 +1,11 @@
 td {
-  aspect-ratio: auto 1 / 1;
+  aspect-ratio: 1 / 1;
+}
+
+td.blue-box {
+  color: blue;
+}
+
+td.red-box {
+  color: red;
 }
