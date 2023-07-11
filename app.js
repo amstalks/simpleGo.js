@@ -6,8 +6,19 @@ function drawBoard(tableSize) {
     boardElement.appendChild(rowElement);
     for (let j = 0; j < tableSize; j++) {
       let dataElement = document.createElement("td");
+      let dataElementClasses = dataElement.classList;
       dataElement.id = `d-${i}-${j}`;
-      dataElement.innerText = ".";
+      dataElement.innerText = `${i}-${j}`;
+      if (i === 0) {
+        dataElementClasses.add("uppermost");
+      } else if (i === tableSize - 1) {
+        dataElementClasses.add("lowermost");
+      }
+      if (j === 0) {
+        dataElementClasses.add("leftmost");
+      } else if (j === tableSize - 1) {
+        dataElementClasses.add("rightmost");
+      }
       rowElement.appendChild(dataElement);
     }
   }
@@ -16,19 +27,21 @@ function drawBoard(tableSize) {
 function play() {
   const tableSize = 9;
   drawBoard(tableSize);
-  currentTurn = "blue-box";
+  firstPlayer = true;
 
   const box = document.querySelectorAll("td");
   for (let i = 0; i < tableSize; i++) {
     for (let j = 0; j < tableSize; j++) {
       let dataElement = box[i * 9 + j];
+      let dataElementClasses = dataElement.classList;
       dataElement.addEventListener("click", () => {
         if (dataElement.innerText === "*") {
           return;
         } else {
           dataElement.innerText = "*";
-          dataElement.className = currentTurn;
-          currentTurn = currentTurn === "blue-box" ? "red-box" : "blue-box";
+          let boxColor = firstPlayer ? "blue-box" : "red-box";
+          dataElementClasses.add(boxColor);
+          firstPlayer = !firstPlayer;
         }
       });
     }
