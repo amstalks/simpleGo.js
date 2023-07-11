@@ -5,21 +5,21 @@ function drawBoard(tableSize) {
     rowElement.id = `r-${i}`;
     boardElement.appendChild(rowElement);
     for (let j = 0; j < tableSize; j++) {
-      let dataElement = document.createElement("td");
-      let dataElementClasses = dataElement.classList;
-      dataElement.id = `d-${i}-${j}`;
-      dataElement.innerText = `${i}-${j}`;
+      let td = document.createElement("td");
+      let tdClasses = td.classList;
+      td.id = `d-${i}-${j}`;
+      td.innerText = ".";
       if (i === 0) {
-        dataElementClasses.add("uppermost");
+        tdClasses.add("uppermost");
       } else if (i === tableSize - 1) {
-        dataElementClasses.add("lowermost");
+        tdClasses.add("lowermost");
       }
       if (j === 0) {
-        dataElementClasses.add("leftmost");
+        tdClasses.add("leftmost");
       } else if (j === tableSize - 1) {
-        dataElementClasses.add("rightmost");
+        tdClasses.add("rightmost");
       }
-      rowElement.appendChild(dataElement);
+      rowElement.appendChild(td);
     }
   }
 }
@@ -28,19 +28,32 @@ function play() {
   const tableSize = 9;
   drawBoard(tableSize);
   firstPlayer = true;
+  function currentClass(firstPlayer) {
+    return firstPlayer ? "blue-box" : "red-box";
+  }
 
   const box = document.querySelectorAll("td");
   for (let i = 0; i < tableSize; i++) {
     for (let j = 0; j < tableSize; j++) {
-      let dataElement = box[i * 9 + j];
-      let dataElementClasses = dataElement.classList;
-      dataElement.addEventListener("click", () => {
-        if (dataElement.innerText === "*") {
+      let td = box[i * 9 + j];
+      let tdClasses = td.classList;
+      let tdUpper = box[(i - 1) * 9 + j];
+      let tdLower = box[(i + 1) * 9 + j];
+      let tdLeft = box[i * 9 + (j - 1)];
+      let tdRight = box[i * 9 + (j + 1)];
+      td.addEventListener("click", () => {
+        if (td.innerText === "*") {
+          return;
+        } else if (
+          tdUpper.classList.contains(currentClass(!firstPlayer)) &&
+          tdLower.classList.contains(currentClass(!firstPlayer)) &&
+          tdLeft.classList.contains(currentClass(!firstPlayer)) &&
+          tdRight.classList.contains(currentClass(!firstPlayer))
+        ) {
           return;
         } else {
-          dataElement.innerText = "*";
-          let boxColor = firstPlayer ? "blue-box" : "red-box";
-          dataElementClasses.add(boxColor);
+          td.innerText = "*";
+          tdClasses.add(currentClass(firstPlayer));
           firstPlayer = !firstPlayer;
         }
       });
