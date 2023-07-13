@@ -2,10 +2,10 @@ td {
   aspect-ratio: 1 / 1;
 }
 
-td.blue-box {
-  color: blue;
+td.p1-box {
+  color: greenyellow;
 }
 
-td.red-box {
-  color: red;
+td.p2-box {
+  color: violet;
 }
