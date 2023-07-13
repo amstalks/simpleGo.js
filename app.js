@@ -33,7 +33,7 @@ function play() {
   }
   currentClass(firstPlayerTurn);
 
-  function fourSeasonsRecursion(i, j, thisOne) {
+  function fourSeasonsRecursion(i, j, thisOne, notThisOne) {
     let thisElement = document.getElementById(`d-${i}-${j}`);
     let elUpper = thisElement,
       elLower = thisElement,
@@ -52,6 +52,7 @@ function play() {
       (elRight.classList.contains(thisOne) || j === boardSize - 1)
     ) {
       thisElement.innerText = ".";
+      thisElement.classList.remove(notThisOne);
     }
   }
 
@@ -70,7 +71,7 @@ function play() {
       td.addEventListener("click", () => {
         let thisOne = currentClass(firstPlayerTurn);
         let notThisOne = currentClass(!firstPlayerTurn);
-        if (td.innerText === "#") {
+        if (td.innerText === "O") {
           return;
         } else if (
           (tdUpper.classList.contains(notThisOne) || i === 0) &&
@@ -80,12 +81,12 @@ function play() {
         ) {
           return;
         } else {
-          td.innerText = "#";
+          td.innerText = "O";
           td.classList.add(thisOne);
-          if (i !== 0) fourSeasonsRecursion(i - 1, j, thisOne);
-          if (i !== boardSize - 1) fourSeasonsRecursion(i + 1, j, thisOne);
-          if (j !== 0) fourSeasonsRecursion(i, j - 1, thisOne);
-          if (j !== boardSize - 1) fourSeasonsRecursion(i, j + 1, thisOne);
+          if (i !== 0) fourSeasonsRecursion(i - 1, j, thisOne, notThisOne);
+          if (i !== boardSize - 1) fourSeasonsRecursion(i + 1, j, thisOne, notThisOne);
+          if (j !== 0) fourSeasonsRecursion(i, j - 1, thisOne, notThisOne);
+          if (j !== boardSize - 1) fourSeasonsRecursion(i, j + 1, thisOne, notThisOne);
           firstPlayerTurn = !firstPlayerTurn;
         }
       });
