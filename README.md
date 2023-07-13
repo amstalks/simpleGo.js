@@ -1,13 +1,10 @@
 # simpleGo.js
-
 A simple implementation of **Go game** in plain HTML, CSS and JavaScript.
 
 ## Introduction
-
 > Go is an abstract strategy board game for two players in which the aim is to surround more territory than the opponent. The game was invented in China more than 2,500 years ago and is believed to be the oldest board game continuously played to the present day.
 
 #### References:
-
 - <https://www.britannica.com/topic/go-game>
 - <https://gomagic.org/how-to-play-go-rules>
 - <https://playgo.to/index.html#/en/intro>
@@ -19,7 +16,6 @@ A simple implementation of **Go game** in plain HTML, CSS and JavaScript.
 ---
 
 ## Pseudocode
-
 I have created a pseudocode using some AI-powered assistants (Google Bard, OpenAI ChatGPT, etc.) with more modifications made by me to be as the following:
 
 ```
@@ -61,6 +57,5 @@ Determine and announce the winner:
 ---
 
 ## License
-
 [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/)  
 This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
